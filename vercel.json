@@ -1,0 +1,7 @@
+{
+  "framework": "nextjs",
+  "installCommand": "cd skillcareer-main && npm install",
+  "buildCommand": "cd skillcareer-main && npm run build",
+  "devCommand": "cd skillcareer-main && npm run dev",
+  "outputDirectory": "skillcareer-main/.next"
+}
