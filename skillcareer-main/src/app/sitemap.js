@@ -2,6 +2,8 @@
  * Dynamic sitemap for skillcareer.in
  * Fetches blog slugs from the specific SkillCareer API and maps them to root-level URLs.
  */
+export const revalidate = 3600
+
 export default async function sitemap() {
   const baseUrl = 'https://www.skillcareer.in'
 
@@ -10,7 +12,7 @@ export default async function sitemap() {
   try {
     const res = await fetch('https://click.creditsdeal.com/admin/listBlogs?websiteName=skillcareer.in', {
       headers: { accept: 'application/json' },
-      cache: 'no-store' // Ensures we always get the latest posts
+      next: { revalidate }
     })
     
     if (res.ok) {

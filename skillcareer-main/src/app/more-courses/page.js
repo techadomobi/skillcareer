@@ -5,6 +5,8 @@ import { ArrowRight, Clock, BookOpen } from 'lucide-react'
 import Header from '@/components/header'
 import FooterEnhancedLight from '@/components/Footer'
 
+export const revalidate = 3600
+
 
 export const metadata = {
   title: 'More Courses | SkillCareer - Business & Startup Insights',
@@ -18,7 +20,7 @@ async function getBlogPosts() {
   try {
     const res = await fetch('https://click.creditsdeal.com/admin/listService?websiteName=skillcareer.in', {
       headers: { 'accept': 'application/json' },
-      cache: 'no-store' 
+      next: { revalidate }
     })
     if (!res.ok) throw new Error('Failed to fetch blogs')
     const response = await res.json()

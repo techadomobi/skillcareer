@@ -6,6 +6,8 @@ import Image from 'next/image'
 import Footer from '@/components/Footer'
 import Header from '@/components/header'
 
+export const revalidate = 3600
+
 export const metadata = {
   title: 'Blog | SkillCareer – Easy Learning for Students & Beginners',
   description: 'Read simple and helpful blogs on career skills, technology, jobs, freelancing, and business basics made easy for students',
@@ -31,7 +33,7 @@ async function getBlogPosts() {
       headers: {
         'accept': 'application/json'
       },
-      cache: 'no-store' 
+      next: { revalidate }
     })
     
     if (!res.ok) {
