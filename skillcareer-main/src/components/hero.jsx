@@ -240,7 +240,7 @@ export default function Hero() {
                 </p>
                 {/* Buttons */}
                  <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                   <Link href="/join-course-today" className="w-full sm:w-auto">
+                   <Link href="/enroll-now" className="w-full sm:w-auto">
                    <Button
                      size="lg"
                      className="rounded-lg px-8 py-4 bg-blue-600 text-white hover:bg-blue-700 text-base font-semibold shadow-lg hover:shadow-blue-500/30 transition group"

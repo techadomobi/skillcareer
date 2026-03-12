@@ -17,7 +17,7 @@ import { Percent, X } from 'lucide-react';
 
 // Define a key for session storage to track if popup was shown
 const POPUP_SHOWN_KEY = 'admissionPopupShown_v1'; // Increment version if you change the promo
-const EXCLUDED_PATH = '/join-course-today'; // Path to exclude the popup on
+const EXCLUDED_PATHS = ["/join-course-today", "/enroll-now"]; // Paths to exclude the popup on
 const POPUP_DELAY = 2000; // ms delay before showing
 
 const AdmissionPopup = () => {
@@ -27,7 +27,7 @@ const AdmissionPopup = () => {
   // Effect to trigger the popup visibility based on path and session
   useEffect(() => {
     // 1. Check if the current path is the excluded one
-    if (pathname === EXCLUDED_PATH) {
+    if (EXCLUDED_PATHS.includes(pathname)) {
       // console.log("Popup excluded on this path:", pathname); // Optional Debugging
       setIsOpen(false); // Ensure it's closed if navigation happens
       return; // Don't proceed further on the excluded path
@@ -127,5 +127,4 @@ const AdmissionPopup = () => {
 };
 
 export default AdmissionPopup;
-
 

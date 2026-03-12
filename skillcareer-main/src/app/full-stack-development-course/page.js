@@ -1,22 +1,18 @@
-
 import Footer from "@/components/Footer"
 import Header from "@/components/header"
-import EnhancedCoursePage from "@/components/EnhancedCoursePage"
-import CourseStructuredData from "@/components/CourseStructuredData"
+import UnifiedCoursePage from "@/components/UnifiedCoursePage"
 import { buildCourseMetadata } from "@/lib/course-seo"
 
 export const metadata = buildCourseMetadata("full-stack-development-course")
 
-export default function FullStackDevelopmentCoursePage() {
+export default function CoursePage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <CourseStructuredData slug="full-stack-development-course" />
       <Header />
       <main className="flex-1">
-        <EnhancedCoursePage courseType="webDevelopment" />
+        <UnifiedCoursePage slug="full-stack-development-course" />
       </main>
       <Footer />
     </div>
   )
 }
-

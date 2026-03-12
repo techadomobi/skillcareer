@@ -13,17 +13,26 @@ const buildCourseMetadata = (slug) => {
 
   const url = `${BASE_URL}/${course.slug}`
   const title = `${course.title} | SkillCareer`
+  const locationKeywords = [
+    `${course.title} Delhi`,
+    `${course.title} Course in Delhi`,
+    `${course.category} Institute in Delhi`,
+    `${course.category} Training in Delhi`,
+    "SkillCareer Delhi",
+  ]
+  const keywords = Array.from(new Set([...(course.keywords || []), ...locationKeywords]))
+  const description = `${course.description} Available with Delhi/NCR focused batches and career support.`
 
   return {
     title,
-    description: course.description,
-    keywords: course.keywords,
+    description,
+    keywords,
     alternates: {
       canonical: url,
     },
     openGraph: {
       title,
-      description: course.description,
+      description,
       url,
       type: "website",
       images: course.image ? [{ url: course.image, alt: course.title }] : undefined,
@@ -31,7 +40,7 @@ const buildCourseMetadata = (slug) => {
     twitter: {
       card: "summary_large_image",
       title,
-      description: course.description,
+      description,
       images: course.image ? [course.image] : undefined,
     },
     robots: {

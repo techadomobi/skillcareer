@@ -210,7 +210,7 @@ export default function Header() {
              <Button variant="ghost" size="sm" className="text-sm font-medium text-gray-600 hover:text-gray-900 px-4">
                 Log in
              </Button>
-             <Link href="/join-course-today" className="flex-shrink-0">
+            <Link href="/enroll-now" className="flex-shrink-0">
             <Button
                 size="sm"
                 className="rounded-full px-5 py-2 bg-blue-600 text-white hover:bg-blue-700 text-sm font-semibold shadow-sm transition-colors"
@@ -257,7 +257,7 @@ export default function Header() {
                     >
                         Log in
                     </Button>
-                    <Link href="/join-course-today" className="flex-shrink-0">
+                    <Link href="/enroll-now" className="flex-shrink-0">
                     <Button
                         className="w-full bg-blue-600 text-white hover:bg-blue-700"
                         onClick={handleMobileLinkClick} // Close menu on click
