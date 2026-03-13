@@ -22,50 +22,122 @@ import {
   UsersRound,
 } from "lucide-react";
 
-const defaultCurriculum = (title) => ([
-  { icon: BookOpen, title: `Core ${title} Concepts`, description: "Build strong fundamentals with structured learning and guided practice.", weeks: "Module 1" },
-  { icon: Target, title: "Applied Skills", description: "Translate concepts into real-world tasks and assignments.", weeks: "Module 2" },
-  { icon: Laptop, title: "Tools & Workflow", description: "Hands-on exposure to tools, frameworks, and industry workflows.", weeks: "Module 3" },
-  { icon: LineChart, title: "Projects & Case Studies", description: "Work on projects that mirror real business or job scenarios.", weeks: "Module 4" },
-  { icon: Users, title: "Mentor Feedback", description: "Weekly reviews, doubt clearing, and structured guidance.", weeks: "Module 5" },
-  { icon: Award, title: "Capstone & Certification", description: "Complete a final project and receive your certificate.", weeks: "Module 6" },
-]);
+const defaultCurriculum = (title) => {
+  if (title === "Digital Marketing Masterclass") {
+    return [
+      { icon: BookOpen, title: "SEO & Content Strategy", description: "Master keyword research, on-page optimization, content planning, and technical SEO for organic growth.", weeks: "Weeks 1-3" },
+      { icon: Target, title: "Paid Advertising (SEM/PPC)", description: "Learn Google Ads, Facebook Ads, Instagram Ads, LinkedIn Ads, and campaign optimization strategies.", weeks: "Weeks 4-6" },
+      { icon: Laptop, title: "Social Media Marketing", description: "Build strategies for Facebook, Instagram, LinkedIn, Twitter, YouTube, and emerging platforms.", weeks: "Weeks 7-9" },
+      { icon: LineChart, title: "Email Marketing & Automation", description: "Create effective email campaigns, automation workflows, and lead nurturing sequences.", weeks: "Weeks 10-11" },
+      { icon: Users, title: "Analytics & Performance", description: "Master Google Analytics, data interpretation, KPIs, and ROI measurement across channels.", weeks: "Weeks 12-13" },
+      { icon: Award, title: "Advanced Strategies & Capstone", description: "E-commerce marketing, influencer marketing, mobile marketing, and comprehensive final project.", weeks: "Weeks 14-16" },
+    ];
+  }
+  return [
+    { icon: BookOpen, title: `Core ${title} Concepts`, description: "Build strong fundamentals with structured learning and guided practice.", weeks: "Module 1" },
+    { icon: Target, title: "Applied Skills", description: "Translate concepts into real-world tasks and assignments.", weeks: "Module 2" },
+    { icon: Laptop, title: "Tools & Workflow", description: "Hands-on exposure to tools, frameworks, and industry workflows.", weeks: "Module 3" },
+    { icon: LineChart, title: "Projects & Case Studies", description: "Work on projects that mirror real business or job scenarios.", weeks: "Module 4" },
+    { icon: Users, title: "Mentor Feedback", description: "Weekly reviews, doubt clearing, and structured guidance.", weeks: "Module 5" },
+    { icon: Award, title: "Capstone & Certification", description: "Complete a final project and receive your certificate.", weeks: "Module 6" },
+  ];
+};
 
-const defaultHighlights = [
-  { icon: CheckCircle, text: "Structured learning path with clear milestones" },
-  { icon: UsersRound, text: "Small batches for better mentor attention" },
-  { icon: ShieldCheck, text: "Job-ready skills and interview guidance" },
-  { icon: CalendarDays, text: "Flexible weekday and weekend schedules" },
-  { icon: Target, text: "Hands-on assignments and practice tasks" },
-  { icon: Globe, text: "Career guidance for Delhi/NCR opportunities" },
-  { icon: Award, text: "Industry-recognized certificate" },
-  { icon: BarChart, text: "Progress tracking and feedback reports" },
-];
+const defaultHighlights = (title) => {
+  if (title === "Digital Marketing Masterclass") {
+    return [
+      { icon: CheckCircle, text: "Complete digital marketing strategy from SEO to paid ads" },
+      { icon: UsersRound, text: "Hands-on campaigns with real platforms and budgets" },
+      { icon: ShieldCheck, text: "Google Ads, Facebook Ads, and analytics certifications" },
+      { icon: CalendarDays, text: "Weekend and weekday batches for working professionals" },
+      { icon: Target, text: "Live projects with Delhi/NCR businesses and startups" },
+      { icon: Globe, text: "Industry expert mentors with 5+ years experience" },
+      { icon: Award, text: "Portfolio of 6+ live campaigns and case studies" },
+      { icon: BarChart, text: "Performance tracking and optimization workshops" },
+    ];
+  }
+  return [
+    { icon: CheckCircle, text: "Structured learning path with clear milestones" },
+    { icon: UsersRound, text: "Small batches for better mentor attention" },
+    { icon: ShieldCheck, text: "Job-ready skills and interview guidance" },
+    { icon: CalendarDays, text: "Flexible weekday and weekend schedules" },
+    { icon: Target, text: "Hands-on assignments and practice tasks" },
+    { icon: Globe, text: "Career guidance for Delhi/NCR opportunities" },
+    { icon: Award, text: "Industry-recognized certificate" },
+    { icon: BarChart, text: "Progress tracking and feedback reports" },
+  ];
+};
 
-const defaultAudience = (title) => ([
-  `Beginners looking to start in ${title}`,
-  "Students and recent graduates",
-  "Working professionals upskilling",
-  "Career switchers exploring new roles",
-  "Entrepreneurs building practical skills",
-]);
+const defaultAudience = (title) => {
+  if (title === "Digital Marketing Masterclass") {
+    return [
+      "Beginners looking to start a career in digital marketing",
+      "Marketing professionals wanting to upgrade their skills",
+      "Business owners and entrepreneurs",
+      "Sales professionals transitioning to marketing",
+      "Recent graduates seeking digital marketing roles",
+      "Working professionals from any field looking for career change",
+      "Content creators wanting to monetize their skills",
+      "Small business owners wanting to grow online",
+    ];
+  }
+  return [
+    `Beginners looking to start in ${title}`,
+    "Students and recent graduates",
+    "Working professionals upskilling",
+    "Career switchers exploring new roles",
+    "Entrepreneurs building practical skills",
+  ];
+};
 
-const defaultOutcomes = (title) => ([
-  `${title} foundation and practical confidence`,
-  "Portfolio-ready projects and assignments",
-  "Interview preparation and job readiness",
-  "Improved productivity and tool fluency",
-  "Clear next steps for advanced learning",
-]);
+const defaultOutcomes = (title) => {
+  if (title === "Digital Marketing Masterclass") {
+    return [
+      "Complete digital marketing strategy and execution skills",
+      "Hands-on experience with Google Ads, Facebook Ads, and analytics tools",
+      "Portfolio of 6+ live campaigns and case studies",
+      "Certification in Google Ads, Facebook Ads, and Google Analytics",
+      "Job-ready skills for digital marketing roles in Delhi/NCR",
+      "Understanding of SEO, content marketing, email marketing, and social media",
+      "Ability to create and optimize marketing campaigns across multiple channels",
+      "Skills in data analysis and performance optimization",
+      "Knowledge of e-commerce marketing and conversion optimization",
+      "Understanding of influencer marketing and mobile marketing strategies",
+    ];
+  }
+  return [
+    `${title} foundation and practical confidence`,
+    "Portfolio-ready projects and assignments",
+    "Interview preparation and job readiness",
+    "Improved productivity and tool fluency",
+    "Clear next steps for advanced learning",
+  ];
+};
 
-const defaultFaqs = (title) => ([
-  { question: `Is this ${title} course beginner friendly?`, answer: "Yes, the program starts from fundamentals and builds step by step." },
-  { question: "Are projects included?", answer: "Yes, every module includes hands-on assignments and a final capstone." },
-  { question: "Do you provide certificates?", answer: "Yes, a SkillCareer completion certificate is provided." },
-  { question: "Is placement support included?", answer: "We offer interview guidance and share relevant opportunities." },
-  { question: "Can I attend weekend batches?", answer: "Yes, weekend and weekday options are available." },
-  { question: "Do I need a laptop?", answer: "A laptop is recommended for practice, but lab support is available in select batches." },
-]);
+const defaultFaqs = (title) => {
+  if (title === "Digital Marketing Masterclass") {
+    return [
+      { question: "Is this digital marketing course beginner friendly?", answer: "Yes, the program starts from fundamentals and builds step by step with hands-on practice." },
+      { question: "Do I need any prior marketing experience?", answer: "No prior experience is required. We start with basics and gradually build your skills." },
+      { question: "Are Google Ads and Facebook Ads certifications included?", answer: "Yes, we provide preparation and guidance for Google Ads, Facebook Ads, and Google Analytics certifications." },
+      { question: "Will I get hands-on experience with real campaigns?", answer: "Yes, every module includes practical assignments and we work on live projects with Delhi/NCR businesses." },
+      { question: "Can I attend weekend batches while working?", answer: "Yes, we offer both weekday and weekend batches designed for working professionals." },
+      { question: "Do I need a laptop for the course?", answer: "A laptop is recommended for practice, but we provide lab access in select batches for hands-on sessions." },
+      { question: "What kind of job roles can I apply for after this course?", answer: "You'll be ready for roles like Digital Marketing Executive, SEO Specialist, Social Media Manager, PPC Analyst, and Marketing Coordinator." },
+      { question: "Do you provide placement assistance?", answer: "Yes, we offer interview preparation, resume building, and share relevant job opportunities in Delhi/NCR." },
+      { question: "Will I get a portfolio of work?", answer: "Yes, you'll complete 6+ live campaigns and case studies that form a strong portfolio for job applications." },
+      { question: "What makes this course different from others?", answer: "Our course combines practical skills with real business projects, industry certifications, and Delhi/NCR focused career guidance." },
+    ];
+  }
+  return [
+    { question: `Is this ${title} course beginner friendly?`, answer: "Yes, the program starts from fundamentals and builds step by step." },
+    { question: "Are projects included?", answer: "Yes, every module includes hands-on assignments and a final capstone." },
+    { question: "Do you provide certificates?", answer: "Yes, a SkillCareer completion certificate is provided." },
+    { question: "Is placement support included?", answer: "We offer interview guidance and share relevant opportunities." },
+    { question: "Can I attend weekend batches?", answer: "Yes, weekend and weekday options are available." },
+    { question: "Do I need a laptop?", answer: "A laptop is recommended for practice, but lab support is available in select batches." },
+  ];
+};
 
 const ToolBadge = ({ name }) => (
   <span className="inline-block bg-slate-100 text-slate-700 text-xs font-medium px-3 py-1.5 rounded-md border border-slate-200/80">
@@ -110,11 +182,17 @@ export default function UnifiedCoursePage({ slug }) {
   const keywords = course?.keywords || [];
 
   const curriculum = defaultCurriculum(title);
-  const highlights = defaultHighlights;
+  const highlights = defaultHighlights(title);
   const audience = defaultAudience(title);
   const outcomes = defaultOutcomes(title);
   const faqs = defaultFaqs(title);
-  const tools = keywords.length > 0 ? keywords.slice(0, 8) : ["Industry Tools", "Real Projects", "Templates", "Workbooks"];
+  const tools = (title === "Digital Marketing Masterclass") 
+    ? [
+        "Google Ads", "Facebook Ads", "Instagram Ads", "LinkedIn Ads", "Google Analytics", 
+        "SEO Tools", "Email Marketing Platforms", "Social Media Management", 
+        "Content Marketing Tools", "E-commerce Platforms", "Influencer Marketing", "Mobile Marketing"
+      ]
+    : (keywords.length > 0 ? keywords.slice(0, 8) : ["Industry Tools", "Real Projects", "Templates", "Workbooks"]);
 
   const navItems = [
     { label: "Overview", href: "#overview" },

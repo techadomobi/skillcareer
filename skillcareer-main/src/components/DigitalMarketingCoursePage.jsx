@@ -8,7 +8,8 @@ import { Separator } from '@/components/ui/separator';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ArrowRight, CheckCircle, Users, BarChart, Search, Mail, Megaphone,
   Award, CalendarDays, UserCheck, Zap, Star, Laptop, Clock, ShieldCheck,
-  BookOpen, Globe, PenTool, Target, UsersRound, BrainCircuit, User
+  BookOpen, Globe, PenTool, Target, UsersRound, BrainCircuit, User,
+  Share2, Palette, ShoppingCart, Radar, BadgeDollarSign
 } from 'lucide-react';
 
 // --- Configuration & Placeholder Data (User's data + Enhanced Content) ---
@@ -100,6 +101,49 @@ const toolsMastered = [
   { name: "Mailchimp" },
   { name: "Ahrefs" },
   { name: "Hootsuite" },
+];
+
+const marketingExpertise = [
+  {
+    icon: Share2,
+    title: "Affiliate Marketing",
+    description: "Connect with the right publishers and affiliate channels to acquire, activate, and retain ideal customers."
+  },
+  {
+    icon: Palette,
+    title: "Branding",
+    description: "Differentiate your brand with the right positioning, messaging, and customer recognition strategies."
+  },
+  {
+    icon: ShoppingCart,
+    title: "E-Commerce",
+    description: "Drive traffic and sales with proven marketing tactics that turn visitors into buyers."
+  },
+  {
+    icon: Target,
+    title: "Lead Generation",
+    description: "Identify prospects, convert them into leads, and improve retention with consistent nurturing."
+  },
+  {
+    icon: Radar,
+    title: "Programmatic Media Buying",
+    description: "Use automated media buying to reach precise audiences across a wide range of digital placements."
+  },
+  {
+    icon: Search,
+    title: "Search Engine Optimization (SEO)",
+    description: "Improve visibility with optimized content, keywords, and technical structure for organic growth."
+  },
+  {
+    icon: Megaphone,
+    title: "Social Media Marketing (SMM)",
+    description: "Grow your brand on social platforms with engaging content and loyal communities."
+  },
+  {
+    icon: BadgeDollarSign,
+    title: "Expert in Paid Ads",
+    description: "Maximize ROI with targeted paid campaigns across search and social channels."
+  },
 ];
 
 // --- Enhanced Target Audience ---
@@ -194,6 +238,21 @@ const RatingStars = ({ rating }) => (
     {[...Array(5)].map((_, i) => (
       <Star key={i} className={`h-4 w-4 ${i < Math.round(rating) ? 'text-yellow-400 fill-yellow-400' : 'text-slate-300'}`} />
     ))}
+  </div>
+);
+
+const MarketingExpertiseCard = ({ icon: Icon, title, description }) => (
+  <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-6 h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+    <div className="flex items-start gap-4 mb-4">
+      <div className="h-10 w-10 rounded-xl bg-orange-50 border border-orange-100 flex items-center justify-center">
+        <Icon className="h-5 w-5 text-orange-600" />
+      </div>
+      <div className="flex-1">
+        <div className="h-0.5 w-10 bg-orange-400 rounded-full mb-3"></div>
+        <h4 className="text-sm font-semibold tracking-wide text-slate-900 uppercase">{title}</h4>
+      </div>
+    </div>
+    <p className="text-sm text-slate-600 leading-relaxed">{description}</p>
   </div>
 );
 
@@ -309,6 +368,18 @@ export default function DigitalMarketingCoursePageNoTabsImages() {
                     <CurriculumCard key={module.title} {...module} /> // Enhanced descriptions applied
                 ))}
              </div>
+          </div>
+
+          <Separator className="my-2 md:my-2 bg-slate-200/80"/> {/* User's separator style */}
+
+          {/* Section 2: Marketing Expertise */}
+          <div>
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 mb-8 md:mb-10 text-center">Marketing Expertise You Will Master</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {marketingExpertise.map((item) => (
+                <MarketingExpertiseCard key={item.title} {...item} />
+              ))}
+            </div>
           </div>
 
           <Separator className="my-2 md:my-2 bg-slate-200/80"/> {/* User's separator style */}

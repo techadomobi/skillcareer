@@ -44,7 +44,7 @@ const featuredCourses = [
   // Add more featured courses if needed (e.g., up to 3 or 4 usually looks good)
 ];
 
-const DEFAULT_COURSE_IMAGE = "/default-course-image.png"; // Fallback image in /public
+const DEFAULT_COURSE_IMAGE = "/skill.jpg"; // Fallback image in /public
 
 // --- Course Card Component ---
 const CourseCard = ({ course }) => (
