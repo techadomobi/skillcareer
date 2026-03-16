@@ -30,7 +30,6 @@ const featuredCourses = [
     duration: "12 Weeks",
     href: "/full-stack-development-course",
   },
-  
   {
     id: 'da01',
     title: "Data Analytics with Python & SQL",
@@ -40,6 +39,26 @@ const featuredCourses = [
     rating: 4.7,
     duration: "14 Weeks",
     href: "/data-analytics-course",
+  },
+  {
+    id: "c10",
+    title: "Class 10 Board Preparation",
+    description: "Concept clarity, practice, and exam strategy for Class 10 CBSE/State boards.",
+    imageSrc: "/stu.jpg",
+    category: "School",
+    rating: 4.7,
+    duration: "24 Weeks",
+    href: "/class-10-course",
+  },
+  {
+    id: "c12",
+    title: "Class 12 Board Preparation",
+    description: "Subject-wise planning, doubt support, and guidance for Class 12 board exams.",
+    imageSrc: "/stu-1.jpeg",
+    category: "School",
+    rating: 4.7,
+    duration: "24 Weeks",
+    href: "/class-12-course",
   },
   // Add more featured courses if needed (e.g., up to 3 or 4 usually looks good)
 ];
@@ -129,7 +148,7 @@ export default function FeaturedCourses() {
 
         {/* "View All" Button */}
         <div className="mt-16 text-center">
-          <Link href="#" passHref legacyBehavior>
+          <Link href="/courses" passHref legacyBehavior>
               <Button
                 size="lg" // Make this button slightly larger
                 variant="default" // Use the primary variant

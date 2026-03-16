@@ -24,8 +24,10 @@ const footerSections = [
     links: [
       { label: "Web Development", href: "/web-development-course" },
       { label: "Digital Marketing", href: "/digital-marketing-course" },
-      { label: "Full Stack Dev", href: "/web-development-course" },
+      { label: "Full Stack Dev", href: "/full-stack-development-course" },
       { label: "Finance Course", href: "/finance-course" },
+      { label: "Class 10", href: "/class-10-course" },
+      { label: "Class 12", href: "/class-12-course" },
     ],
   },
   {

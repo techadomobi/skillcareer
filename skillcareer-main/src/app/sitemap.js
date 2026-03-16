@@ -51,6 +51,8 @@ export default async function sitemap() {
     { url: `${baseUrl}/english-speaking-course`, lastModified: now, changeFrequency: 'weekly', priority: 0.64 },
     { url: `${baseUrl}/affiliate-marketing-course`, lastModified: now, changeFrequency: 'weekly', priority: 0.64 },
     { url: `${baseUrl}/youtube-seo-growth-course`, lastModified: now, changeFrequency: 'weekly', priority: 0.64 },
+    { url: `${baseUrl}/class-10-course`, lastModified: now, changeFrequency: 'weekly', priority: 0.64 },
+    { url: `${baseUrl}/class-12-course`, lastModified: now, changeFrequency: 'weekly', priority: 0.64 },
   ]
 
   // 3. Generate Dynamic Blog Pages (at root level: /slug)

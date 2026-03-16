@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import CourseStructuredData from "@/components/CourseStructuredData";
@@ -129,6 +130,30 @@ const defaultFaqs = (title) => {
       { question: "What makes this course different from others?", answer: "Our course combines practical skills with real business projects, industry certifications, and Delhi/NCR focused career guidance." },
     ];
   }
+  if (title === "Class 10 Board Preparation") {
+    return [
+      { question: "Which boards does this Class 10 program support?", answer: "The study plan is aligned for CBSE and most State boards, with focus on concept clarity and exam practice." },
+      { question: "Which subjects are covered in Class 10?", answer: "Typically: Maths, Science, English, and Social Science. We share a subject-wise schedule during onboarding." },
+      { question: "How are classes conducted?", answer: "We offer structured teaching, weekly practice, and doubt-solving. Batch options can include online and offline depending on availability." },
+      { question: "Do you provide notes, worksheets, and sample papers?", answer: "Yes. You get chapter-wise notes, worksheets, and board-pattern practice sets for revision." },
+      { question: "Are mock tests included?", answer: "Yes. Regular tests and mock exams are conducted with feedback so students improve scores steadily." },
+      { question: "How do you help with time management and exam strategy?", answer: "We teach paper-solving strategy, revision planning, and mistake analysis to improve speed and accuracy." },
+      { question: "Can parents get progress updates?", answer: "Yes. We provide periodic progress updates and guidance on how to support study routines at home." },
+      { question: "Is a demo class available?", answer: "Yes. You can book a demo session and talk to the counselor for batch timings and subject availability." },
+    ];
+  }
+  if (title === "Class 12 Board Preparation") {
+    return [
+      { question: "Which streams are supported for Class 12?", answer: "We support major streams including Science, Commerce, and Arts. Subject availability depends on the batch." },
+      { question: "Is this program aligned for CBSE/State board exams?", answer: "Yes. The program focuses on board patterns, previous year questions, and structured revision." },
+      { question: "Do you help with practicals and internal assessments?", answer: "Yes. Guidance is provided for practical files, viva preparation, and internal assessment requirements where applicable." },
+      { question: "Are previous year papers and mock tests included?", answer: "Yes. Students get PYQs, chapter tests, and full-length mocks with performance review." },
+      { question: "How is doubt solving handled?", answer: "Dedicated doubt sessions are included so students can clear concepts quickly and stay consistent." },
+      { question: "Can I join if I am starting late in the session?", answer: "Yes. We help you catch up with a recovery plan and extra practice based on your weak areas." },
+      { question: "Do you provide career guidance after 12th?", answer: "Yes. We share guidance on common pathways and entrance prep direction based on the student's goals." },
+      { question: "Is a demo class available?", answer: "Yes. Book a demo to confirm stream, subjects, batch timings, and format (online/offline)." },
+    ];
+  }
   return [
     { question: `Is this ${title} course beginner friendly?`, answer: "Yes, the program starts from fundamentals and builds step by step." },
     { question: "Are projects included?", answer: "Yes, every module includes hands-on assignments and a final capstone." },
@@ -180,6 +205,8 @@ export default function UnifiedCoursePage({ slug }) {
   const price = course?.price || 0;
   const discountedPrice = course?.discountedPrice || price;
   const keywords = course?.keywords || [];
+  const imageSrc = course?.image || "/skill.jpg";
+  const enrollHref = `/enroll/${slug}`;
 
   const curriculum = defaultCurriculum(title);
   const highlights = defaultHighlights(title);
@@ -210,8 +237,9 @@ export default function UnifiedCoursePage({ slug }) {
 
       <section className="relative bg-gradient-to-b from-blue-50/60 via-white to-white pt-16 pb-12 lg:pt-20 lg:pb-16 overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-5">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center max-w-6xl mx-auto">
+            <div className="lg:col-span-7 text-center lg:text-left">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-3 mb-5">
               <span className="bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide border border-blue-200/80">
                 Career-Focused Program
               </span>
@@ -253,11 +281,54 @@ export default function UnifiedCoursePage({ slug }) {
             ) : null}
             <div className="flex flex-col sm:flex-row items-stretch justify-center gap-4">
               <Button size="lg" asChild className="rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 px-8 py-3.5 text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
-                <Link href="#enroll">Enroll in Course</Link>
+                <Link href={enrollHref}>Enroll Now</Link>
               </Button>
               <Button variant="outline" asChild className="rounded-xl px-6 py-3 text-base font-semibold">
                 <Link href="/contact">Talk to Admissions</Link>
               </Button>
+            </div>
+            </div>
+
+            <div className="lg:col-span-5">
+              <div className="relative rounded-3xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+                <div className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-blue-200/40 blur-2xl" />
+                <div className="absolute -bottom-14 -left-14 h-44 w-44 rounded-full bg-indigo-200/40 blur-2xl" />
+                <div className="relative aspect-[16/10] w-full">
+                  <Image
+                    src={imageSrc}
+                    alt={title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    priority
+                  />
+                </div>
+                <div className="relative p-5">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="text-sm font-semibold text-slate-900">Enroll in this program</div>
+                    <div className="text-xs font-medium text-slate-500">Limited seats</div>
+                  </div>
+                  {discountedPrice ? (
+                    <div className="mt-3 flex items-baseline gap-2">
+                      <span className="text-2xl font-extrabold text-blue-700">₹{discountedPrice.toLocaleString()}</span>
+                      {price && price !== discountedPrice ? (
+                        <span className="text-sm text-slate-400 line-through">₹{price.toLocaleString()}</span>
+                      ) : null}
+                    </div>
+                  ) : null}
+                  <div className="mt-4 flex flex-col sm:flex-row gap-3">
+                    <Button asChild className="rounded-xl bg-blue-600 hover:bg-blue-700">
+                      <Link href={enrollHref}>Apply for Admission</Link>
+                    </Button>
+                    <Button variant="outline" asChild className="rounded-xl">
+                      <Link href="/courses">View all courses</Link>
+                    </Button>
+                  </div>
+                  <p className="mt-3 text-xs text-slate-500">
+                    You will get fee details, batch timings, and counselor support.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -405,7 +476,7 @@ export default function UnifiedCoursePage({ slug }) {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" asChild className="bg-white text-blue-700 hover:bg-blue-50 font-semibold px-8 py-3 rounded-lg shadow-lg">
-              <Link href="/enroll-now">Enroll Now</Link>
+              <Link href={enrollHref}>Enroll Now</Link>
             </Button>
             <Button
               variant="outline"

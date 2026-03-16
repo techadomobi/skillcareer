@@ -55,6 +55,8 @@ export default function Header() {
         { href: "/full-stack-development-course", label: "Full Stack Development" },
         { href: "/finance-course", label: "Finance Course" },
         { href: "/accounting-course", label: "Accounting Course" },
+        { href: "/class-10-course", label: "Class 10" },
+        { href: "/class-12-course", label: "Class 12" },
 
         // { href: "/courses/all", label: "View All Courses", isPrimary: true },
       ],

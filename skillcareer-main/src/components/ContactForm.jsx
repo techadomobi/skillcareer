@@ -27,7 +27,7 @@ import {
     ChevronLeft
 } from "lucide-react";
 
-export function ContactForm() {
+export function ContactForm({ courseTitle }) {
     // Form field states
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -135,7 +135,10 @@ export function ContactForm() {
         params.append('fullName', name);
         params.append('email', email);
         params.append('mobileNumber', phone);
-        params.append('additional_text1', message);
+        const messageWithCourse = courseTitle
+          ? `Course Interested: ${courseTitle}\n\n${message || ""}`.trim()
+          : message;
+        params.append('additional_text1', messageWithCourse);
         params.append('receivedBy', 'skillcareer.in');
         params.append('country', 'India');
         // Optionally, you can send the consent status to your API if it supports it
@@ -222,9 +225,22 @@ export function ContactForm() {
                     <CardDescription className="text-gray-600 text-base pt-1.5">
                         Get course details, fees, and career guidance. Fill the form below!
                     </CardDescription>
+                    {courseTitle ? (
+                      <div className="mt-3 inline-flex items-center rounded-full bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 border border-blue-100">
+                        Selected course: <span className="ml-1 text-blue-900">{courseTitle}</span>
+                      </div>
+                    ) : null}
                 </CardHeader>
                 <CardContent className="p-6 md:p-7">
                     <form onSubmit={handleSubmit} className="space-y-5">
+                        {courseTitle ? (
+                          <div className="space-y-1.5">
+                            <Label className="text-sm font-medium text-gray-700">
+                              Course
+                            </Label>
+                            <Input value={courseTitle} readOnly disabled className="bg-gray-50" />
+                          </div>
+                        ) : null}
                         <div className="space-y-1.5">
                             <Label htmlFor="name" className="text-sm font-medium text-gray-700">
                                 Full Name <span className="text-red-500">*</span>
@@ -324,7 +340,8 @@ export function ContactForm() {
                 </CardFooter>
             </Card>
             
-            {/* Our Core Programs Section (remains the same) */}
+            {/* Our Core Programs Section (only for generic enroll page) */}
+            {!courseTitle ? (
             <div className="space-y-5 pt-8 mt-8">
                 <h2 className="text-2xl sm:hidden font-bold text-gray-800 mb-4 flex items-center justify-center text-center">
                     <span className="w-10 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mr-3"></span>
@@ -399,6 +416,7 @@ export function ContactForm() {
                     </>
                 )}
             </div>
+            ) : null}
         </>
     );
 }
