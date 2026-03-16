@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Reveal } from "@/components/ui/reveal";
 import CourseStructuredData from "@/components/CourseStructuredData";
 import { getCourseBySlug } from "@/lib/course-catalog";
 import {
@@ -165,24 +166,24 @@ const defaultFaqs = (title) => {
 };
 
 const ToolBadge = ({ name }) => (
-  <span className="inline-block bg-slate-100 text-slate-700 text-xs font-medium px-3 py-1.5 rounded-md border border-slate-200/80">
+  <span className="inline-flex items-center gap-1.5 bg-white/70 backdrop-blur text-slate-800 text-xs font-semibold px-3 py-1.5 rounded-full border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition">
     {name}
   </span>
 );
 
 const HighlightItem = ({ icon: Icon, text }) => (
-  <div className="flex items-start gap-3">
-    <div className="flex-shrink-0 mt-1 text-blue-500">
-      <CheckCircle className="h-5 w-5" />
+  <div className="group flex items-start gap-3 rounded-xl border border-transparent hover:border-slate-200 hover:bg-white/70 hover:shadow-sm px-3 py-2 transition">
+    <div className="flex-shrink-0 mt-1 text-blue-600">
+      {Icon ? <Icon className="h-5 w-5" /> : <CheckCircle className="h-5 w-5" />}
     </div>
     <span className="text-sm font-medium text-slate-700">{text}</span>
   </div>
 );
 
 const CurriculumCard = ({ icon: Icon, title, description, weeks }) => (
-  <div className="bg-white p-6 rounded-xl border border-slate-200 flex flex-col h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1.5 hover:border-blue-300">
+  <div className="group bg-white p-6 rounded-2xl border border-slate-200 flex flex-col h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 hover:border-blue-300">
     <div className="flex items-center justify-between gap-4 mb-4">
-      <div className="flex-shrink-0 rounded-lg p-3 shadow-sm bg-blue-50">
+      <div className="flex-shrink-0 rounded-xl p-3 shadow-sm bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100/70">
         <Icon className="h-6 w-6 text-blue-600" />
       </div>
       <span className="text-xs font-semibold py-1 px-3 rounded-md border bg-blue-50 text-blue-700 border-blue-100">
@@ -191,8 +192,32 @@ const CurriculumCard = ({ icon: Icon, title, description, weeks }) => (
     </div>
     <h4 className="text-md font-semibold text-slate-900 mb-2">{title}</h4>
     <p className="text-sm text-slate-600 flex-grow leading-relaxed">{description}</p>
+    <div className="mt-5 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent opacity-0 group-hover:opacity-100 transition" />
   </div>
 );
+
+const StepCard = ({ step, title, description }) => (
+  <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-lg transition">
+    <div className="absolute -top-4 left-6 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-1.5 text-xs font-bold tracking-wide text-white shadow-md">
+      Step {step}
+    </div>
+    <div className="pt-3">
+      <h4 className="text-lg font-semibold text-slate-900">{title}</h4>
+      <p className="mt-2 text-sm leading-relaxed text-slate-600">{description}</p>
+    </div>
+  </div>
+);
+
+const COURSE_NAV_ITEMS = [
+  { label: "Overview", href: "#overview" },
+  { label: "Curriculum", href: "#curriculum" },
+  { label: "Journey", href: "#journey" },
+  { label: "Highlights", href: "#highlights" },
+  { label: "Tools", href: "#tools" },
+  { label: "Outcomes", href: "#outcomes" },
+  { label: "FAQs", href: "#faqs" },
+  { label: "Enroll", href: "#enroll" },
+];
 
 export default function UnifiedCoursePage({ slug }) {
   const course = getCourseBySlug(slug);
@@ -221,132 +246,272 @@ export default function UnifiedCoursePage({ slug }) {
       ]
     : (keywords.length > 0 ? keywords.slice(0, 8) : ["Industry Tools", "Real Projects", "Templates", "Workbooks"]);
 
-  const navItems = [
-    { label: "Overview", href: "#overview" },
-    { label: "Curriculum", href: "#curriculum" },
-    { label: "Highlights", href: "#highlights" },
-    { label: "Tools", href: "#tools" },
-    { label: "Outcomes", href: "#outcomes" },
-    { label: "FAQs", href: "#faqs" },
-    { label: "Enroll", href: "#enroll" },
-  ];
+  const navItems = COURSE_NAV_ITEMS;
+
+  const journeySteps =
+    title === "Digital Marketing Masterclass"
+      ? [
+          {
+            title: "Research & Strategy",
+            description: "Build a complete marketing foundation: positioning, audience, competitor research, and channel planning.",
+          },
+          {
+            title: "Execution Across Channels",
+            description: "Run SEO, paid ads, social, and email with hands-on assignments and mentor feedback every week.",
+          },
+          {
+            title: "Analytics & Optimization",
+            description: "Track KPIs, interpret data, and optimize creatives, keywords, landing pages, and budgets for ROI.",
+          },
+          {
+            title: "Capstone & Portfolio",
+            description: "Ship a portfolio-ready project with case study + interview guidance to help you get hired.",
+          },
+        ]
+      : [
+          {
+            title: "Learn Fundamentals",
+            description: "Start from basics with clear concepts, guided demos, and structured practice.",
+          },
+          {
+            title: "Hands-on Practice",
+            description: "Apply learning through tasks, assignments, and small projects with feedback.",
+          },
+          {
+            title: "Build Projects",
+            description: "Create real-world projects that prove your skill and improve confidence.",
+          },
+          {
+            title: "Get Career Support",
+            description: "Get interview guidance, next-step roadmap, and a completion certificate.",
+          },
+        ];
+
+  const [activeSection, setActiveSection] = React.useState(navItems[0]?.href || "#overview");
+
+  React.useEffect(() => {
+    const hrefById = new Map(navItems.map((item) => [item.href.replace("#", ""), item.href]));
+    const targets = navItems
+      .map((item) => document.querySelector(item.href))
+      .filter(Boolean);
+
+    if (targets.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => (b.intersectionRatio || 0) - (a.intersectionRatio || 0));
+
+        const top = visible[0];
+        const id = top?.target?.id;
+        const href = id ? hrefById.get(id) : null;
+        if (href) setActiveSection(href);
+      },
+      {
+        root: null,
+        rootMargin: "-25% 0px -65% 0px",
+        threshold: [0, 0.1, 0.25, 0.5],
+      }
+    );
+
+    targets.forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="bg-white overflow-hidden">
       <CourseStructuredData slug={slug} />
 
-      <section className="relative bg-gradient-to-b from-blue-50/60 via-white to-white pt-16 pb-12 lg:pt-20 lg:pb-16 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-slate-950 via-slate-950 to-indigo-950 pt-16 pb-12 lg:pt-20 lg:pb-16 overflow-hidden text-white">
+        <div className="pointer-events-none absolute inset-0 opacity-80 [background:radial-gradient(1000px_500px_at_20%_0%,rgba(59,130,246,0.35),transparent_60%)]" />
+        <div className="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(900px_500px_at_85%_20%,rgba(99,102,241,0.30),transparent_60%)]" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center max-w-6xl mx-auto">
-            <div className="lg:col-span-7 text-center lg:text-left">
+            <Reveal as="div" className="lg:col-span-7 text-center lg:text-left">
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-3 mb-5">
-              <span className="bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide border border-blue-200/80">
+              <span className="bg-white/10 text-white text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide border border-white/15 backdrop-blur">
                 Career-Focused Program
               </span>
-              <span className="flex items-center gap-1.5 bg-green-100 text-green-800 text-xs font-semibold px-3 py-1.5 rounded-full border border-green-200/80">
+              <span className="flex items-center gap-1.5 bg-white/10 text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/15 backdrop-blur">
                 <Award className="h-4 w-4" />
                 <span>SkillCareer Certificate</span>
               </span>
-              <span className="flex items-center gap-1.5 bg-indigo-100 text-indigo-800 text-xs font-semibold px-3 py-1.5 rounded-full border border-indigo-200/80">
+              <span className="flex items-center gap-1.5 bg-white/10 text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/15 backdrop-blur">
                 <UsersRound className="h-4 w-4" />
                 <span>Delhi/NCR Focused Batches</span>
               </span>
             </div>
-            <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl mb-5">
-              {title}
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl mb-5">
+              <span className="bg-gradient-to-r from-white via-blue-100 to-indigo-200 bg-clip-text text-transparent">
+                {title}
+              </span>
             </h1>
-            <p className="text-lg leading-relaxed text-slate-600 mb-6 max-w-3xl mx-auto">
+            <p className="text-lg leading-relaxed text-slate-200/90 mb-6 max-w-3xl mx-auto">
               {description}
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-slate-500 mb-8">
-              <div className="flex items-center gap-1.5"> <CalendarDays className="h-4 w-4 text-blue-500" /> {duration} </div>
-              <div className="text-slate-300 hidden sm:block">|</div>
-              <div className="flex items-center gap-1.5"> <Laptop className="h-4 w-4 text-blue-500" /> {category} </div>
-              <div className="text-slate-300 hidden sm:block">|</div>
-              <div className="flex items-center gap-1.5"> <BarChart className="h-4 w-4 text-blue-500" /> {level} </div>
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-slate-200/80 mb-8">
+              <div className="flex items-center gap-1.5"> <CalendarDays className="h-4 w-4 text-blue-300" /> {duration} </div>
+              <div className="text-white/20 hidden sm:block">|</div>
+              <div className="flex items-center gap-1.5"> <Laptop className="h-4 w-4 text-blue-300" /> {category} </div>
+              <div className="text-white/20 hidden sm:block">|</div>
+              <div className="flex items-center gap-1.5"> <BarChart className="h-4 w-4 text-blue-300" /> {level} </div>
             </div>
             {discountedPrice ? (
               <div className="flex flex-col sm:flex-row sm:items-center justify-center gap-4 mb-8">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-bold text-blue-600">₹{discountedPrice.toLocaleString()}</span>
+                  <span className="text-3xl font-bold text-white">₹{discountedPrice.toLocaleString()}</span>
                   {price && price !== discountedPrice && (
-                    <span className="text-lg text-slate-400 line-through">₹{price.toLocaleString()}</span>
+                    <span className="text-lg text-slate-300/70 line-through">₹{price.toLocaleString()}</span>
                   )}
                 </div>
-                <div className="flex items-center text-xs font-medium text-green-700 bg-green-50 px-3 py-1.5 rounded-full border border-green-200/70">
-                  <ShieldCheck className="h-4 w-4 mr-1.5" />
+                <div className="flex items-center text-xs font-semibold text-white bg-white/10 px-3 py-1.5 rounded-full border border-white/15 backdrop-blur">
+                  <ShieldCheck className="h-4 w-4 mr-1.5 text-emerald-300" />
                   Flexible installment options
                 </div>
               </div>
             ) : null}
             <div className="flex flex-col sm:flex-row items-stretch justify-center gap-4">
-              <Button size="lg" asChild className="rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 px-8 py-3.5 text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
+              <Button size="lg" asChild className="rounded-xl bg-white text-slate-950 hover:bg-slate-100 px-8 py-3.5 text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
                 <Link href={enrollHref}>Enroll Now</Link>
               </Button>
-              <Button variant="outline" asChild className="rounded-xl px-6 py-3 text-base font-semibold">
+              <Button variant="outline" asChild className="rounded-xl px-6 py-3 text-base font-semibold border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white">
                 <Link href="/contact">Talk to Admissions</Link>
               </Button>
             </div>
-            </div>
+            </Reveal>
 
-            <div className="lg:col-span-5">
-              <div className="relative rounded-3xl border border-slate-200 bg-white shadow-sm overflow-hidden">
-                <div className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-blue-200/40 blur-2xl" />
-                <div className="absolute -bottom-14 -left-14 h-44 w-44 rounded-full bg-indigo-200/40 blur-2xl" />
+            <Reveal as="div" delay={120} className="lg:col-span-5">
+              <div className="relative rounded-3xl border border-white/10 bg-white/5 shadow-sm overflow-hidden backdrop-blur">
+                <div className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-blue-400/25 blur-2xl motion-safe:animate-pulse motion-reduce:animate-none animate-floaty" />
+                <div className="absolute -bottom-14 -left-14 h-44 w-44 rounded-full bg-indigo-400/25 blur-2xl motion-safe:animate-pulse motion-reduce:animate-none animate-floaty-slow" />
                 <div className="relative aspect-[16/10] w-full">
                   <Image
                     src={imageSrc}
                     alt={title}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
                     sizes="(max-width: 1024px) 100vw, 40vw"
                     priority
                   />
                 </div>
                 <div className="relative p-5">
                   <div className="flex items-center justify-between gap-3">
-                    <div className="text-sm font-semibold text-slate-900">Enroll in this program</div>
-                    <div className="text-xs font-medium text-slate-500">Limited seats</div>
+                    <div className="text-sm font-semibold text-white">Enroll in this program</div>
+                    <div className="text-xs font-medium text-slate-200/70">Limited seats</div>
                   </div>
                   {discountedPrice ? (
                     <div className="mt-3 flex items-baseline gap-2">
-                      <span className="text-2xl font-extrabold text-blue-700">₹{discountedPrice.toLocaleString()}</span>
+                      <span className="text-2xl font-extrabold text-white">₹{discountedPrice.toLocaleString()}</span>
                       {price && price !== discountedPrice ? (
-                        <span className="text-sm text-slate-400 line-through">₹{price.toLocaleString()}</span>
+                        <span className="text-sm text-slate-200/60 line-through">₹{price.toLocaleString()}</span>
                       ) : null}
                     </div>
                   ) : null}
                   <div className="mt-4 flex flex-col sm:flex-row gap-3">
-                    <Button asChild className="rounded-xl bg-blue-600 hover:bg-blue-700">
+                    <Button asChild className="rounded-xl bg-white text-slate-950 hover:bg-slate-100">
                       <Link href={enrollHref}>Apply for Admission</Link>
                     </Button>
-                    <Button variant="outline" asChild className="rounded-xl">
+                    <Button variant="outline" asChild className="rounded-xl border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white">
                       <Link href="/courses">View all courses</Link>
                     </Button>
                   </div>
-                  <p className="mt-3 text-xs text-slate-500">
+                  <p className="mt-3 text-xs text-slate-200/70">
                     You will get fee details, batch timings, and counselor support.
                   </p>
                 </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="py-10 lg:py-12 max-w-6xl mx-auto">
+            <div className="flex items-center justify-center gap-3 text-center mb-7">
+              <span className="h-px w-10 bg-slate-200" />
+              <p className="text-xs font-semibold tracking-[0.22em] text-slate-500 uppercase">
+                Trusted by brands & startups
+              </p>
+              <span className="h-px w-10 bg-slate-200" />
+            </div>
+
+            <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
+              <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-slate-50 to-transparent" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-slate-50 to-transparent" />
+
+              <div className="flex gap-10 py-6 px-6 w-max animate-scroll-left motion-reduce:animate-none">
+                {[
+                  { src: "/amazon-logo.png", alt: "Amazon" },
+                  { src: "/google.png", alt: "Google" },
+                  { src: "/Flipkart.png", alt: "Flipkart" },
+                  { src: "/myntra.jpeg", alt: "Myntra" },
+                  { src: "/meesho.png", alt: "Meesho" },
+                  { src: "/phonepe.jpg", alt: "PhonePe" },
+                  { src: "/PAYTM.NS_BIG.png", alt: "Paytm" },
+                  { src: "/jio.webp", alt: "Jio" },
+                  { src: "/blinkit_logo_web.webp", alt: "Blinkit" },
+                ]
+                  .concat([
+                    { src: "/amazon-logo.png", alt: "Amazon" },
+                    { src: "/google.png", alt: "Google" },
+                    { src: "/Flipkart.png", alt: "Flipkart" },
+                    { src: "/myntra.jpeg", alt: "Myntra" },
+                    { src: "/meesho.png", alt: "Meesho" },
+                    { src: "/phonepe.jpg", alt: "PhonePe" },
+                    { src: "/PAYTM.NS_BIG.png", alt: "Paytm" },
+                    { src: "/jio.webp", alt: "Jio" },
+                    { src: "/blinkit_logo_web.webp", alt: "Blinkit" },
+                  ])
+                  .map((logo, idx) => (
+                    <div key={`${logo.alt}-${idx}`} className="flex items-center justify-center h-10 w-28">
+                      <Image
+                        src={logo.src}
+                        alt={logo.alt}
+                        width={140}
+                        height={40}
+                        className="max-h-10 w-auto object-contain opacity-80 grayscale hover:grayscale-0 hover:opacity-100 transition"
+                      />
+                    </div>
+                  ))}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="sticky top-16 z-30 bg-white border-b border-slate-200/80">
+      <section className="sticky top-16 z-30 bg-white/80 backdrop-blur border-b border-slate-200/80">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap gap-3 py-4">
             {navItems.map((item) => (
-              <Button key={item.href} variant="ghost" size="sm" asChild className="text-sm font-medium">
-                <a href={item.href}>{item.label}</a>
+              <Button
+                key={item.href}
+                variant="ghost"
+                size="sm"
+                asChild
+                className={[
+                  "text-sm font-semibold rounded-full transition",
+                  activeSection === item.href ? "bg-blue-50 text-blue-700 hover:bg-blue-100" : "text-slate-600 hover:bg-slate-100",
+                ].join(" ")}
+              >
+                <a
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const target = document.querySelector(item.href);
+                    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                >
+                  {item.label}
+                </a>
               </Button>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-14 lg:py-18 bg-slate-50/70" id="overview">
+      <Reveal as="section" className="scroll-mt-28 py-14 lg:py-18 bg-slate-50/70" id="overview">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <div className="space-y-5">
@@ -377,66 +542,102 @@ export default function UnifiedCoursePage({ slug }) {
                 real projects, and career guidance tailored to local hiring needs.
               </p>
               <div className="space-y-3">
-                {audience.map((item) => (
-                  <div key={item} className="flex items-center gap-3 bg-white rounded-lg px-4 py-3 border border-slate-200">
+                {audience.map((item, index) => (
+                  <Reveal
+                    key={item}
+                    delay={index * 60}
+                    className="flex items-center gap-3 bg-white rounded-xl px-4 py-3 border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
+                  >
                     <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
                     <span className="text-slate-700 font-medium">{item}</span>
-                  </div>
+                  </Reveal>
                 ))}
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </Reveal>
 
-      <section className="py-14 lg:py-18 bg-white" id="curriculum">
+      <Reveal as="section" className="scroll-mt-28 py-14 lg:py-18 bg-white" id="curriculum">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 text-center mb-10">Course Curriculum</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {curriculum.map((module) => (
-              <CurriculumCard key={module.title} {...module} />
+            {curriculum.map((module, index) => (
+              <Reveal key={module.title} delay={index * 80}>
+                <CurriculumCard {...module} />
+              </Reveal>
             ))}
           </div>
         </div>
-      </section>
+      </Reveal>
 
-      <section className="py-14 lg:py-18 bg-slate-50/70" id="highlights">
+      <Reveal as="section" className="scroll-mt-28 py-14 lg:py-18 bg-slate-50/70" id="journey">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-10">
+              <p className="text-xs font-semibold tracking-[0.22em] text-slate-500 uppercase mb-3">How the program works</p>
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900">Your Learning Journey</h2>
+              <p className="mt-3 text-slate-600 max-w-2xl mx-auto">
+                A structured path from fundamentals to real outcomes, designed like modern training programs used by top institutes.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {journeySteps.map((step, index) => (
+                <Reveal key={step.title} delay={index * 90}>
+                  <StepCard step={index + 1} title={step.title} description={step.description} />
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Reveal>
+
+      <Reveal as="section" className="scroll-mt-28 py-14 lg:py-18 bg-slate-50/70" id="highlights">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 text-center mb-10">Program Highlights</h2>
           <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {highlights.map((highlight) => (
-              <HighlightItem key={highlight.text} icon={highlight.icon} text={highlight.text} />
+            {highlights.map((highlight, index) => (
+              <Reveal key={highlight.text} delay={index * 60}>
+                <HighlightItem icon={highlight.icon} text={highlight.text} />
+              </Reveal>
             ))}
           </div>
         </div>
-      </section>
+      </Reveal>
 
-      <section className="py-14 lg:py-18 bg-white" id="tools">
+      <Reveal as="section" className="scroll-mt-28 py-14 lg:py-18 bg-white" id="tools">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 text-center mb-10">Tools & Concepts Covered</h2>
-          <div className="max-w-4xl mx-auto flex flex-wrap gap-2 justify-center">
-            {tools.map((tool) => (
-              <ToolBadge key={tool} name={tool} />
+            <div className="max-w-4xl mx-auto flex flex-wrap gap-2 justify-center">
+              {tools.map((tool, index) => (
+              <Reveal key={tool} delay={Math.min(index * 40, 400)} className="inline-flex">
+                <ToolBadge name={tool} />
+              </Reveal>
             ))}
-          </div>
+            </div>
         </div>
-      </section>
+      </Reveal>
 
-      <section className="py-14 lg:py-18 bg-slate-50/70" id="outcomes">
+      <Reveal as="section" className="scroll-mt-28 py-14 lg:py-18 bg-slate-50/70" id="outcomes">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 text-center mb-10">Career Outcomes</h2>
           <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
-            {outcomes.map((item) => (
-              <div key={item} className="flex items-center gap-3 bg-white rounded-lg px-5 py-4 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+            {outcomes.map((item, index) => (
+              <Reveal
+                key={item}
+                delay={index * 55}
+                className="flex items-center gap-3 bg-white rounded-xl px-5 py-4 border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
+              >
                 <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
                 <span className="text-slate-700 font-medium text-sm">{item}</span>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
-      </section>
+      </Reveal>
 
-      <section className="py-14 lg:py-18 bg-white" id="faqs">
+      <Reveal as="section" className="scroll-mt-28 py-14 lg:py-18 bg-white" id="faqs">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold tracking-tight text-slate-900">Frequently Asked Questions</h2>
@@ -464,9 +665,9 @@ export default function UnifiedCoursePage({ slug }) {
             </Button>
           </div>
         </div>
-      </section>
+      </Reveal>
 
-      <section className="py-16 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white" id="enroll">
+      <Reveal as="section" className="scroll-mt-28 py-16 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white" id="enroll">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-5">
             Ready to Start {title}?
@@ -488,7 +689,7 @@ export default function UnifiedCoursePage({ slug }) {
           </div>
           <p className="text-sm text-blue-200 mt-4">Career guidance • Project-based learning • Delhi/NCR-focused batches</p>
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }

@@ -78,6 +78,16 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -145,4 +155,18 @@
   50% { transform: rotate(-10deg); }
   75% { transform: rotate(10deg); }
   100% { transform: rotate(0deg); }
+}
+
+@keyframes floaty {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -10px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+.animate-floaty {
+  animation: floaty 7s ease-in-out infinite;
+}
+
+.animate-floaty-slow {
+  animation: floaty 10s ease-in-out infinite;
 }
