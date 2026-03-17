@@ -2,26 +2,26 @@
 import React from 'react';
 
 const clientLogos = [
-  { name: "ACKO", url: "acko.png" },
-  { name: "Aditya Birla Group", url: "phone.jpg" },
-  { name: "Adomobi", url: "myntr.png" },
-  { name: "Amazon", url: "amazon-logo.png" },
-  { name: "Adidas", url: "adidas-removebg-preview.png" },
-  { name: "Blinkit", url: "blinkit_logo_web.webp" },
-  { name: "Frank", url: "PAYTM.NS_BIG.png" },
-  { name: "Hexamobi", url: "flipkartlogo.png" },
-  { name: "Juspay", url: "oyo-rooms-logo.png" },
-  { name: "OnTaxCo", url: "urban-company-logo.png" },
-  { name: "Primary", url: "primary-logo.svg" },
+  { name: "ACKO", url: "/acko.png" },
+  { name: "Aditya Birla Group", url: "/phone.jpg" },
+  { name: "Adomobi", url: "/myntr.png" },
+  { name: "Amazon", url: "/amazon-logo.png" },
+  { name: "Adidas", url: "/adidas-removebg-preview.png" },
+  { name: "Blinkit", url: "/blinkit_logo_web.webp" },
+  { name: "Frank", url: "/PAYTM.NS_BIG.png" },
+  { name: "Hexamobi", url: "/flipkartlogo.png" },
+  { name: "Juspay", url: "/oyo-rooms-logo.png" },
+  { name: "OnTaxCo", url: "/urban-company-logo.png" },
+  { name: "Primary", url: "/primary-logo.svg" },
   // { name: "Razorpay", url: "rozarpay.webp" },
-  { name: "Adani", url: "adan.png" },
-  { name: "Google", url: "Googlee.png" },
-  { name: "Meesho", url: "meesho.png" },
-  { name: "Jio", url: "jio.webp" },
-  { name: "Book", url: "Makemy.webp" },
-  { name: "Disnep", url: "Disney.svg" },
+  { name: "Adani", url: "/adan.png" },
+  { name: "Google", url: "/Googlee.png" },
+  { name: "Meesho", url: "/meesho.png" },
+  { name: "Jio", url: "/jio.webp" },
+  { name: "Book", url: "/Makemy.webp" },
+  { name: "Disnep", url: "/Disney.svg" },
   // { name: "zomato", url: "zomata.png" },
-  { name: "swiggy", url: "swiggy.png" },
+  { name: "swiggy", url: "/swiggy.png" },
   // { name: "hdfc", url: "hdfc.jpeg" },
 
 ];
@@ -41,20 +41,28 @@ const ClientLogos = () => {
           </p>
         </div>
         
-        {/* Logos */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
-          {clientLogos.map((logo, index) => (
-            <div 
-              key={index} 
-              className="flex justify-center items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
-            >
-              <img 
-                src={logo.url} 
-                alt={`${logo.name} logo`} 
-                className="h-20 object-contain filter  hover:grayscale-0 transition-all duration-300" 
-              />
-            </div>
-          ))}
+        {/* Logos Marquee (auto-scroll like course pages) */}
+        <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white/70">
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-gray-50 to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-gray-50 to-transparent" />
+
+          <div className="flex gap-10 py-8 px-6 w-max animate-scroll-left motion-reduce:animate-none">
+            {clientLogos
+              .concat(clientLogos)
+              .map((logo, index) => (
+                <div
+                  key={`${logo.name}-${index}`}
+                  className="flex items-center justify-center h-14 w-36 sm:w-40 md:w-44 lg:w-48"
+                >
+                  <img
+                    src={logo.url}
+                    alt={`${logo.name} logo`}
+                    loading="lazy"
+                    className="max-h-10 w-auto object-contain opacity-80 grayscale hover:grayscale-0 hover:opacity-100 transition"
+                  />
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </section>

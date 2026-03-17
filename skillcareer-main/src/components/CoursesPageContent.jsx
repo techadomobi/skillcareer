@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Reveal } from "@/components/ui/reveal";
 import {
   Select,
   SelectContent,
@@ -47,7 +48,7 @@ const CourseCard = ({ course }) => {
   const discountPercentage = calculateDiscountPercentage(course.price, course.discountedPrice);
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 h-full group"> {/* Added group class */}
+    <div className="wow-border wow-sheen flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 h-full group"> {/* Added group class */}
       {/* Image Section */}
       <Link
         href={course.href}
@@ -248,8 +249,10 @@ export default function CoursesPageContent() {
           {filteredCourses.length > 0 ? (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-8">
               {/* Use the updated CourseCard */}
-              {filteredCourses.map((course) => (
-                <CourseCard key={course.id} course={course} />
+              {filteredCourses.map((course, index) => (
+                <Reveal key={course.id} variant="zoom" delay={Math.min(index * 55, 350)} className="h-full">
+                  <CourseCard course={course} />
+                </Reveal>
               ))}
             </div>
           ) : (

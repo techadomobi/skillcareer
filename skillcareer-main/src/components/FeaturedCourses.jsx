@@ -5,6 +5,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link'; // For linking cards/buttons
 import { Button } from '@/components/ui/button';
+import { Reveal } from "@/components/ui/reveal";
 import { ArrowRight, Star, Clock } from 'lucide-react'; // Example icons
 
 // --- Configuration ---
@@ -67,7 +68,7 @@ const DEFAULT_COURSE_IMAGE = "/skill.jpg"; // Fallback image in /public
 
 // --- Course Card Component ---
 const CourseCard = ({ course }) => (
-  <div className="flex flex-col overflow-hidden rounded-xl border border-gray-200/90 bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg h-full group">
+  <div className="wow-border wow-sheen flex flex-col overflow-hidden rounded-2xl border border-gray-200/90 bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 h-full group">
     {/* Image Area */}
     <Link href={course.href} className="block aspect-[16/9] overflow-hidden relative">
       <Image
@@ -141,8 +142,10 @@ export default function FeaturedCourses() {
 
         {/* Courses Grid */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {featuredCourses.map((course) => (
-            <CourseCard key={course.id} course={course} />
+          {featuredCourses.map((course, index) => (
+            <Reveal key={course.id} variant="zoom" delay={Math.min(index * 70, 300)} className="h-full">
+              <CourseCard course={course} />
+            </Reveal>
           ))}
         </div>
 

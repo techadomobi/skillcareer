@@ -166,13 +166,13 @@ const defaultFaqs = (title) => {
 };
 
 const ToolBadge = ({ name }) => (
-  <span className="inline-flex items-center gap-1.5 bg-white/70 backdrop-blur text-slate-800 text-xs font-semibold px-3 py-1.5 rounded-full border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition">
+  <span className="wow-sheen inline-flex items-center gap-1.5 bg-white/70 backdrop-blur text-slate-800 text-xs font-semibold px-3 py-1.5 rounded-full border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition">
     {name}
   </span>
 );
 
 const HighlightItem = ({ icon: Icon, text }) => (
-  <div className="group flex items-start gap-3 rounded-xl border border-transparent hover:border-slate-200 hover:bg-white/70 hover:shadow-sm px-3 py-2 transition">
+  <div className="wow-sheen group flex items-start gap-3 rounded-xl border border-transparent hover:border-slate-200 hover:bg-white/70 hover:shadow-sm px-3 py-2 transition">
     <div className="flex-shrink-0 mt-1 text-blue-600">
       {Icon ? <Icon className="h-5 w-5" /> : <CheckCircle className="h-5 w-5" />}
     </div>
@@ -181,7 +181,7 @@ const HighlightItem = ({ icon: Icon, text }) => (
 );
 
 const CurriculumCard = ({ icon: Icon, title, description, weeks }) => (
-  <div className="group bg-white p-6 rounded-2xl border border-slate-200 flex flex-col h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 hover:border-blue-300">
+  <div className="wow-border wow-sheen group bg-white p-6 rounded-2xl border border-slate-200 flex flex-col h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 hover:border-blue-300">
     <div className="flex items-center justify-between gap-4 mb-4">
       <div className="flex-shrink-0 rounded-xl p-3 shadow-sm bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100/70">
         <Icon className="h-6 w-6 text-blue-600" />
@@ -197,11 +197,11 @@ const CurriculumCard = ({ icon: Icon, title, description, weeks }) => (
 );
 
 const StepCard = ({ step, title, description }) => (
-  <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-lg transition">
-    <div className="absolute -top-4 left-6 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-1.5 text-xs font-bold tracking-wide text-white shadow-md">
+  <div className="wow-border relative h-full overflow-visible rounded-2xl">
+    <div className="absolute left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-1.5 text-xs font-bold tracking-wide text-white shadow-md">
       Step {step}
     </div>
-    <div className="pt-3">
+    <div className="wow-sheen relative z-10 h-full rounded-2xl border border-slate-200 bg-white p-6 pt-8 shadow-sm transition hover:shadow-lg">
       <h4 className="text-lg font-semibold text-slate-900">{title}</h4>
       <p className="mt-2 text-sm leading-relaxed text-slate-600">{description}</p>
     </div>
@@ -324,11 +324,17 @@ export default function UnifiedCoursePage({ slug }) {
       <CourseStructuredData slug={slug} />
 
       <section className="relative bg-gradient-to-br from-slate-950 via-slate-950 to-indigo-950 pt-16 pb-12 lg:pt-20 lg:pb-16 overflow-hidden text-white">
+        <div className="pointer-events-none absolute inset-0 opacity-[0.18] [background-image:linear-gradient(to_right,rgba(148,163,184,0.22)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.22)_1px,transparent_1px)] [background-size:48px_48px]" />
         <div className="pointer-events-none absolute inset-0 opacity-80 [background:radial-gradient(1000px_500px_at_20%_0%,rgba(59,130,246,0.35),transparent_60%)]" />
         <div className="pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(900px_500px_at_85%_20%,rgba(99,102,241,0.30),transparent_60%)]" />
+        <div className="pointer-events-none absolute inset-0">
+          <div className="wow-blob wow-blob-1" />
+          <div className="wow-blob wow-blob-2" />
+          <div className="wow-blob wow-blob-3" />
+        </div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center max-w-6xl mx-auto">
-            <Reveal as="div" className="lg:col-span-7 text-center lg:text-left">
+            <Reveal as="div" variant="slideRight" className="lg:col-span-7 text-center lg:text-left">
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-3 mb-5">
               <span className="bg-white/10 text-white text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide border border-white/15 backdrop-blur">
                 Career-Focused Program
@@ -381,8 +387,8 @@ export default function UnifiedCoursePage({ slug }) {
             </div>
             </Reveal>
 
-            <Reveal as="div" delay={120} className="lg:col-span-5">
-              <div className="relative rounded-3xl border border-white/10 bg-white/5 shadow-sm overflow-hidden backdrop-blur">
+            <Reveal as="div" variant="slideLeft" delay={120} className="lg:col-span-5">
+              <div className="wow-border wow-sheen relative rounded-3xl border border-white/10 bg-white/5 shadow-sm overflow-hidden backdrop-blur">
                 <div className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-blue-400/25 blur-2xl motion-safe:animate-pulse motion-reduce:animate-none animate-floaty" />
                 <div className="absolute -bottom-14 -left-14 h-44 w-44 rounded-full bg-indigo-400/25 blur-2xl motion-safe:animate-pulse motion-reduce:animate-none animate-floaty-slow" />
                 <div className="relative aspect-[16/10] w-full">
@@ -525,11 +531,11 @@ export default function UnifiedCoursePage({ slug }) {
                 clear milestones, and a final capstone that demonstrates your capability to employers or clients.
               </p>
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white p-4 rounded-lg border border-slate-200">
+                <div className="wow-border wow-sheen bg-white p-4 rounded-lg border border-slate-200 transition hover:-translate-y-0.5 hover:shadow-md">
                   <div className="text-2xl font-bold text-blue-600">{duration.split(" ")[0]}</div>
                   <div className="text-sm text-slate-600">Weeks Duration</div>
                 </div>
-                <div className="bg-white p-4 rounded-lg border border-slate-200">
+                <div className="wow-border wow-sheen bg-white p-4 rounded-lg border border-slate-200 transition hover:-translate-y-0.5 hover:shadow-md">
                   <div className="text-2xl font-bold text-green-600">{curriculum.length}+</div>
                   <div className="text-sm text-slate-600">Learning Modules</div>
                 </div>
@@ -563,7 +569,7 @@ export default function UnifiedCoursePage({ slug }) {
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 text-center mb-10">Course Curriculum</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {curriculum.map((module, index) => (
-              <Reveal key={module.title} delay={index * 80}>
+              <Reveal key={module.title} delay={index * 80} className="h-full">
                 <CurriculumCard {...module} />
               </Reveal>
             ))}
@@ -571,7 +577,7 @@ export default function UnifiedCoursePage({ slug }) {
         </div>
       </Reveal>
 
-      <Reveal as="section" className="scroll-mt-28 py-14 lg:py-18 bg-slate-50/70" id="journey">
+      <Reveal as="section" className="scroll-mt-28 pt-14 pb-10 lg:pt-16 lg:pb-12 bg-slate-50/70" id="journey">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-10">
@@ -584,7 +590,7 @@ export default function UnifiedCoursePage({ slug }) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {journeySteps.map((step, index) => (
-                <Reveal key={step.title} delay={index * 90}>
+                <Reveal key={step.title} delay={index * 90} className="h-full">
                   <StepCard step={index + 1} title={step.title} description={step.description} />
                 </Reveal>
               ))}
