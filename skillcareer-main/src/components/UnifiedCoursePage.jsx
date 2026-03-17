@@ -166,13 +166,13 @@ const defaultFaqs = (title) => {
 };
 
 const ToolBadge = ({ name }) => (
-  <span className="wow-sheen inline-flex items-center gap-1.5 bg-white/70 backdrop-blur text-slate-800 text-xs font-semibold px-3 py-1.5 rounded-full border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition">
+  <span className="wow-sheen course-pill inline-flex items-center gap-1.5 bg-white/70 backdrop-blur text-slate-800 text-xs font-semibold px-3 py-1.5 rounded-full border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition">
     {name}
   </span>
 );
 
 const HighlightItem = ({ icon: Icon, text }) => (
-  <div className="wow-sheen group flex items-start gap-3 rounded-xl border border-transparent hover:border-slate-200 hover:bg-white/70 hover:shadow-sm px-3 py-2 transition">
+  <div className="wow-sheen course-surface course-float group flex items-start gap-3 rounded-xl border border-transparent hover:border-slate-200 hover:bg-white/70 px-3 py-2 transition">
     <div className="flex-shrink-0 mt-1 text-blue-600">
       {Icon ? <Icon className="h-5 w-5" /> : <CheckCircle className="h-5 w-5" />}
     </div>
@@ -181,7 +181,7 @@ const HighlightItem = ({ icon: Icon, text }) => (
 );
 
 const CurriculumCard = ({ icon: Icon, title, description, weeks }) => (
-  <div className="wow-border wow-sheen group bg-white p-6 rounded-2xl border border-slate-200 flex flex-col h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 hover:border-blue-300">
+  <div className="wow-border wow-sheen course-surface course-float group bg-white p-6 rounded-2xl border border-slate-200 flex flex-col h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 hover:border-blue-300">
     <div className="flex items-center justify-between gap-4 mb-4">
       <div className="flex-shrink-0 rounded-xl p-3 shadow-sm bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100/70">
         <Icon className="h-6 w-6 text-blue-600" />
@@ -201,7 +201,7 @@ const StepCard = ({ step, title, description }) => (
     <div className="absolute left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-1.5 text-xs font-bold tracking-wide text-white shadow-md">
       Step {step}
     </div>
-    <div className="wow-sheen relative z-10 h-full rounded-2xl border border-slate-200 bg-white p-6 pt-8 shadow-sm transition hover:shadow-lg">
+    <div className="wow-sheen course-surface course-float relative z-10 h-full rounded-2xl border border-slate-200 bg-white p-6 pt-8 shadow-sm transition hover:shadow-lg">
       <h4 className="text-lg font-semibold text-slate-900">{title}</h4>
       <p className="mt-2 text-sm leading-relaxed text-slate-600">{description}</p>
     </div>
@@ -336,17 +336,29 @@ export default function UnifiedCoursePage({ slug }) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center max-w-6xl mx-auto">
             <Reveal as="div" variant="slideRight" className="lg:col-span-7 text-center lg:text-left">
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-3 mb-5">
-              <span className="bg-white/10 text-white text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide border border-white/15 backdrop-blur">
+              <span
+                className="content-rise bg-white/10 text-white text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide border border-white/15 backdrop-blur"
+                style={{ animationDelay: "80ms" }}
+              >
                 Career-Focused Program
               </span>
-              <span className="flex items-center gap-1.5 bg-white/10 text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/15 backdrop-blur">
+              <span
+                className="content-rise flex items-center gap-1.5 bg-white/10 text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/15 backdrop-blur"
+                style={{ animationDelay: "160ms" }}
+              >
                 <Award className="h-4 w-4" />
                 <span>SkillCareer Certificate</span>
               </span>
-              <span className="flex items-center gap-1.5 bg-white/10 text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/15 backdrop-blur">
+              <span
+                className="content-rise flex items-center gap-1.5 bg-white/10 text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/15 backdrop-blur"
+                style={{ animationDelay: "240ms" }}
+              >
                 <UsersRound className="h-4 w-4" />
                 <span>Delhi/NCR Focused Batches</span>
               </span>
+            </div>
+            <div className="mb-6 flex flex-col items-center lg:items-start gap-3">
+              <span className="adomobi-kicker">SkillCareer Programs</span>
             </div>
             <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl mb-5">
               <span className="bg-gradient-to-r from-white via-blue-100 to-indigo-200 bg-clip-text text-transparent">
@@ -356,6 +368,24 @@ export default function UnifiedCoursePage({ slug }) {
             <p className="text-lg leading-relaxed text-slate-200/90 mb-6 max-w-3xl mx-auto">
               {description}
             </p>
+            <div className="stat-grid grid-cols-1 sm:grid-cols-3 mb-7">
+              {[
+                { value: duration, label: "Program Duration" },
+                { value: `${curriculum.length}+`, label: "Learning Modules" },
+                { value: `${tools.length}+`, label: "Tools & Concepts" },
+              ].map((item, index) => (
+                <div
+                  key={item.label}
+                  className="stat-tile content-rise"
+                  style={{ animationDelay: `${180 + index * 90}ms` }}
+                >
+                  <div className="text-2xl font-bold text-white">{item.value}</div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-300/80 mt-2">
+                    {item.label}
+                  </div>
+                </div>
+              ))}
+            </div>
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-slate-200/80 mb-8">
               <div className="flex items-center gap-1.5"> <CalendarDays className="h-4 w-4 text-blue-300" /> {duration} </div>
               <div className="text-white/20 hidden sm:block">|</div>
@@ -378,7 +408,7 @@ export default function UnifiedCoursePage({ slug }) {
               </div>
             ) : null}
             <div className="flex flex-col sm:flex-row items-stretch justify-center gap-4">
-              <Button size="lg" asChild className="rounded-xl bg-white text-slate-950 hover:bg-slate-100 px-8 py-3.5 text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
+              <Button size="lg" asChild className="rounded-xl bg-white text-slate-950 hover:bg-slate-100 px-8 py-3.5 text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300 cta-pulse">
                 <Link href={enrollHref}>Enroll Now</Link>
               </Button>
               <Button variant="outline" asChild className="rounded-xl px-6 py-3 text-base font-semibold border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white">
@@ -521,7 +551,10 @@ export default function UnifiedCoursePage({ slug }) {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <div className="space-y-5">
-              <h2 className="text-3xl font-bold tracking-tight text-slate-900">Course Overview</h2>
+              <div>
+                <p className="section-kicker mb-3">Overview</p>
+                <h2 className="section-title text-3xl font-bold tracking-tight text-slate-900">Course Overview</h2>
+              </div>
               <p className="text-slate-600 leading-relaxed">
                 This {title} program is designed to move you from fundamentals to confident execution with a practical, industry-aligned curriculum.
                 Every module blends concept clarity with real assignments so you can show proof of skill on day one.
@@ -531,18 +564,21 @@ export default function UnifiedCoursePage({ slug }) {
                 clear milestones, and a final capstone that demonstrates your capability to employers or clients.
               </p>
               <div className="grid grid-cols-2 gap-4">
-                <div className="wow-border wow-sheen bg-white p-4 rounded-lg border border-slate-200 transition hover:-translate-y-0.5 hover:shadow-md">
+                <div className="wow-border wow-sheen course-surface course-float bg-white p-4 rounded-lg border border-slate-200 transition hover:-translate-y-0.5 hover:shadow-md">
                   <div className="text-2xl font-bold text-blue-600">{duration.split(" ")[0]}</div>
                   <div className="text-sm text-slate-600">Weeks Duration</div>
                 </div>
-                <div className="wow-border wow-sheen bg-white p-4 rounded-lg border border-slate-200 transition hover:-translate-y-0.5 hover:shadow-md">
+                <div className="wow-border wow-sheen course-surface course-float bg-white p-4 rounded-lg border border-slate-200 transition hover:-translate-y-0.5 hover:shadow-md">
                   <div className="text-2xl font-bold text-green-600">{curriculum.length}+</div>
                   <div className="text-sm text-slate-600">Learning Modules</div>
                 </div>
               </div>
             </div>
             <div className="space-y-5">
-              <h3 className="text-xl font-semibold text-slate-900">Why SkillCareer in Delhi/NCR</h3>
+              <div>
+                <p className="section-kicker mb-2">Local Advantage</p>
+                <h3 className="text-xl font-semibold text-slate-900">Why SkillCareer in Delhi/NCR</h3>
+              </div>
               <p className="text-slate-600 leading-relaxed">
                 Our batches are aligned with the practical standards you expect from leading institutes in Delhi. The focus is on job-ready outcomes,
                 real projects, and career guidance tailored to local hiring needs.
@@ -566,7 +602,10 @@ export default function UnifiedCoursePage({ slug }) {
 
       <Reveal as="section" className="scroll-mt-28 py-14 lg:py-18 bg-white" id="curriculum">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 text-center mb-10">Course Curriculum</h2>
+          <div className="text-center mb-10">
+            <p className="section-kicker mb-3">Curriculum</p>
+            <h2 className="section-title text-3xl font-bold tracking-tight text-slate-900">Course Curriculum</h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {curriculum.map((module, index) => (
               <Reveal key={module.title} delay={index * 80} className="h-full">
@@ -581,8 +620,8 @@ export default function UnifiedCoursePage({ slug }) {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-10">
-              <p className="text-xs font-semibold tracking-[0.22em] text-slate-500 uppercase mb-3">How the program works</p>
-              <h2 className="text-3xl font-bold tracking-tight text-slate-900">Your Learning Journey</h2>
+              <p className="section-kicker mb-3">How It Works</p>
+              <h2 className="section-title text-3xl font-bold tracking-tight text-slate-900">Your Learning Journey</h2>
               <p className="mt-3 text-slate-600 max-w-2xl mx-auto">
                 A structured path from fundamentals to real outcomes, designed like modern training programs used by top institutes.
               </p>
@@ -601,7 +640,10 @@ export default function UnifiedCoursePage({ slug }) {
 
       <Reveal as="section" className="scroll-mt-28 py-14 lg:py-18 bg-slate-50/70" id="highlights">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 text-center mb-10">Program Highlights</h2>
+          <div className="text-center mb-10">
+            <p className="section-kicker mb-3">Highlights</p>
+            <h2 className="section-title text-3xl font-bold tracking-tight text-slate-900">Program Highlights</h2>
+          </div>
           <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-5">
             {highlights.map((highlight, index) => (
               <Reveal key={highlight.text} delay={index * 60}>
@@ -614,7 +656,10 @@ export default function UnifiedCoursePage({ slug }) {
 
       <Reveal as="section" className="scroll-mt-28 py-14 lg:py-18 bg-white" id="tools">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 text-center mb-10">Tools & Concepts Covered</h2>
+          <div className="text-center mb-10">
+            <p className="section-kicker mb-3">Tools</p>
+            <h2 className="section-title text-3xl font-bold tracking-tight text-slate-900">Tools & Concepts Covered</h2>
+          </div>
             <div className="max-w-4xl mx-auto flex flex-wrap gap-2 justify-center">
               {tools.map((tool, index) => (
               <Reveal key={tool} delay={Math.min(index * 40, 400)} className="inline-flex">
@@ -627,13 +672,16 @@ export default function UnifiedCoursePage({ slug }) {
 
       <Reveal as="section" className="scroll-mt-28 py-14 lg:py-18 bg-slate-50/70" id="outcomes">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 text-center mb-10">Career Outcomes</h2>
+          <div className="text-center mb-10">
+            <p className="section-kicker mb-3">Outcomes</p>
+            <h2 className="section-title text-3xl font-bold tracking-tight text-slate-900">Career Outcomes</h2>
+          </div>
           <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
             {outcomes.map((item, index) => (
               <Reveal
                 key={item}
                 delay={index * 55}
-                className="flex items-center gap-3 bg-white rounded-xl px-5 py-4 border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
+                className="course-surface course-float flex items-center gap-3 bg-white rounded-xl px-5 py-4 border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
               >
                 <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
                 <span className="text-slate-700 font-medium text-sm">{item}</span>
@@ -646,7 +694,8 @@ export default function UnifiedCoursePage({ slug }) {
       <Reveal as="section" className="scroll-mt-28 py-14 lg:py-18 bg-white" id="faqs">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900">Frequently Asked Questions</h2>
+            <p className="section-kicker mb-3">FAQs</p>
+            <h2 className="section-title text-3xl font-bold tracking-tight text-slate-900">Frequently Asked Questions</h2>
           </div>
           <Accordion type="single" collapsible className="w-full space-y-4">
             {faqs.map((faq, index) => (
