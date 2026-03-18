@@ -3,9 +3,10 @@ import ClientLogos from "@/components/ClientLogos"
 import { LearningSection } from "@/components/LearningSection"
 import EnrollCourseInfo from "@/components/EnrollCourseInfo"
 import { ContactForm } from "@/components/ContactForm"
+import Link from "next/link"
 import { getCourseBySlug } from "@/lib/course-catalog"
 import { notFound } from "next/navigation"
-import { Award, UsersRound } from "lucide-react"
+import { Award, UsersRound, Zap, Shield, Clock, Users, GraduationCap, Briefcase, Star, Sparkles } from "lucide-react"
 
 export async function generateMetadata({ params }) {
   const { slug } = await params
@@ -72,6 +73,20 @@ export default async function EnrollCoursePage({ params }) {
     },
   ]
 
+  const trustSignals = [
+    { icon: <Zap className="h-5 w-5" />, text: "Fast response" },
+    { icon: <Shield className="h-5 w-5" />, text: "Secure process" },
+    { icon: <Clock className="h-5 w-5" />, text: "24/7 support" },
+    { icon: <Users className="h-5 w-5" />, text: "Trusted by 1000+ students" },
+  ]
+
+  const courseHighlights = [
+    { icon: <GraduationCap className="h-5 w-5" />, text: "Industry-recognized certification" },
+    { icon: <Briefcase className="h-5 w-5" />, text: "Job placement assistance" },
+    { icon: <Users className="h-5 w-5" />, text: "Expert mentorship" },
+    { icon: <Clock className="h-5 w-5" />, text: "Flexible batch timings" },
+  ]
+
   return (
     <div className="flex flex-col min-h-screen enroll-theme">
       <Header />
@@ -83,7 +98,7 @@ export default async function EnrollCoursePage({ params }) {
         <div className="absolute -bottom-24 left-1/2 w-72 h-72 bg-emerald-200 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000" />
 
         <div className="container mx-auto max-w-7xl relative z-10 px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 text-center lg:text-left space-y-4">
+          <div className="mb-10 text-center lg:text-left space-y-6">
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3">
               <span className="enroll-badge">Enrollment</span>
               <span className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-xs font-semibold text-slate-700 border border-slate-200 shadow-sm">
@@ -95,45 +110,32 @@ export default async function EnrollCoursePage({ params }) {
                 Industry-ready curriculum
               </span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight enroll-title">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight enroll-title">
               Secure your seat for <span className="text-blue-700">{course.title}</span>
-            </h2>
-            <p className="text-slate-600 max-w-2xl lg:max-w-3xl">
+            </h1>
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto lg:max-w-none">
               Share your details and get fee details, batch timings, and counselor support tailored to your goals.
             </p>
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
-              <div className="stat-tile bg-white/85">
-                <div className="text-2xl font-bold text-slate-900">Live</div>
-                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Mentor Sessions</div>
-              </div>
-              <div className="stat-tile bg-white/85">
-                <div className="text-2xl font-bold text-slate-900">Career</div>
-                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Guidance</div>
-              </div>
-              <div className="stat-tile bg-white/85">
-                <div className="text-2xl font-bold text-slate-900">Flexible</div>
-                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Batch Options</div>
-              </div>
-            </div>
+            
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3">
-              <a
+              <Link
                 href="/contact"
-                className="rounded-full bg-blue-600 text-white px-5 py-2 text-sm font-semibold shadow-md hover:bg-blue-700 transition"
+                className="rounded-full bg-blue-600 text-white px-6 py-3 text-base font-semibold shadow-lg hover:bg-blue-700 transition-all transform hover:scale-105"
               >
                 Talk to a Consultant
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/contact"
-                className="rounded-full bg-white text-slate-900 px-5 py-2 text-sm font-semibold border border-slate-200 hover:border-slate-300 transition"
+                className="rounded-full bg-white text-slate-900 px-6 py-3 text-base font-semibold border border-slate-200 hover:border-slate-300 transition-all transform hover:scale-105"
               >
                 Download Syllabus
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/courses"
-                className="rounded-full bg-slate-900 text-white px-5 py-2 text-sm font-semibold hover:bg-slate-800 transition"
+                className="rounded-full bg-slate-900 text-white px-6 py-3 text-base font-semibold hover:bg-slate-800 transition-all transform hover:scale-105"
               >
                 View Schedules
-              </a>
+              </Link>
             </div>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 items-start">
@@ -160,16 +162,65 @@ export default async function EnrollCoursePage({ params }) {
               What you can expect after enrollment
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {outcomes.map((item) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {outcomes.map((item, index) => (
               <div
                 key={item}
-                className="enroll-card px-5 py-4 text-slate-700 relative overflow-hidden"
+                className="enroll-card px-6 py-5 text-slate-700 relative overflow-hidden rounded-xl border border-slate-200 bg-white hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
               >
-                <span className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-blue-500 via-indigo-500 to-emerald-500" />
-                {item}
+                <div className="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-blue-500 via-indigo-500 to-emerald-500" />
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-emerald-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                    {index + 1}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-slate-900 mb-2">Milestone {index + 1}</h3>
+                    <p className="text-slate-600">{item}</p>
+                  </div>
+                </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-gradient-to-br from-indigo-50 via-white to-emerald-50 py-12">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <p className="section-kicker mb-3">Why Choose Us</p>
+            <h2 className="section-title text-3xl font-bold tracking-tight text-slate-900">
+              Course Highlights & Benefits
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+              <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                <Star className="h-5 w-5 text-yellow-500" />
+                Course Benefits
+              </h3>
+              <div className="space-y-3">
+                {courseHighlights.map((highlight, index) => (
+                  <div key={index} className="flex items-center gap-3 text-slate-700">
+                    <div className="text-blue-600">{highlight.icon}</div>
+                    <span>{highlight.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+              <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                <Shield className="h-5 w-5 text-green-600" />
+                Trust & Security
+              </h3>
+              <div className="space-y-3">
+                {trustSignals.map((signal, index) => (
+                  <div key={index} className="flex items-center gap-3 text-slate-700">
+                    <div className="text-emerald-600">{signal.icon}</div>
+                    <span>{signal.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

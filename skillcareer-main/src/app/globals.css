@@ -735,6 +735,71 @@ html {
   pointer-events: none;
 }
 
+.enroll-writing-wrap {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  padding-right: 0.18em;
+}
+
+.enroll-writing-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+  max-width: 100%;
+  color: transparent;
+  background: linear-gradient(90deg, #0f172a 0%, #0369a1 35%, #2563eb 68%, #0f172a 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  border-right: 3px solid rgba(37, 99, 235, 0.8);
+  animation: enroll-type 4.4s steps(28, end) infinite, enroll-caret 0.9s steps(1, end) infinite, enroll-shine 5.5s linear infinite;
+}
+
+@keyframes enroll-type {
+  0% {
+    width: 0;
+  }
+  45% {
+    width: 100%;
+  }
+  70% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}
+
+@keyframes enroll-caret {
+  0%,
+  49% {
+    border-color: rgba(37, 99, 235, 0.85);
+  }
+  50%,
+  100% {
+    border-color: transparent;
+  }
+}
+
+@keyframes enroll-shine {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@media (max-width: 640px) {
+  .enroll-writing-text {
+    white-space: normal;
+    border-right: 0;
+    animation: enroll-shine 5.5s linear infinite;
+  }
+}
+
 @keyframes course-shift {
   0% {
     background-position: 0% 50%;

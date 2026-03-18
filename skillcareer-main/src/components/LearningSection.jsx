@@ -1,105 +1,60 @@
-import React from 'react';
-import { CheckCircle2 } from 'lucide-react'; // Using a filled checkmark icon like the image
+import React from "react";
+import { CheckCircle2, Sparkles } from "lucide-react";
 
 const learningTopics = [
-  { text: "Search Engine Optimization", tone: "amber" },
-  { text: "Social Media Marketing", tone: "blue" },
-  { text: "Facebook & Instagram Ads", tone: "emerald" },
-  { text: "Google Ads", tone: "slate" },
-  { text: "Website Designing", tone: "amber" },
-  { text: "Website Development", tone: "blue" },
-  { text: "Graphic Designing", tone: "emerald" },
-  { text: "Video Editing", tone: "slate" },
-  { text: "Influencer Marketing", tone: "amber" },
-  { text: "E-Commerce Marketing", tone: "blue" },
-  { text: "Online Reputation Management", tone: "emerald" },
-  { text: "Blogging & Bloggers", tone: "slate" },
-  { text: "Full stack Development", tone: "amber" },
-  { text: "Ads Psychology", tone: "blue" },
-  { text: "Mock Interviews", tone: "emerald" },
-];
-
-const toneStyles = {
-  amber: {
-    card: "bg-white text-slate-900",
-    bar: "bg-gradient-to-b from-amber-400 via-amber-500 to-amber-600",
-    chip: "bg-amber-500/15 text-amber-700",
-    ring: "ring-1 ring-slate-200/70",
-    shadow: "shadow-[0_18px_34px_-26px_rgba(15,23,42,0.35)]",
-  },
-  blue: {
-    card: "bg-white text-slate-900",
-    bar: "bg-gradient-to-b from-blue-500 via-blue-600 to-indigo-700",
-    chip: "bg-blue-500/15 text-blue-700",
-    ring: "ring-1 ring-slate-200/70",
-    shadow: "shadow-[0_18px_34px_-26px_rgba(15,23,42,0.35)]",
-  },
-  emerald: {
-    card: "bg-white text-slate-900",
-    bar: "bg-gradient-to-b from-emerald-400 via-emerald-500 to-teal-600",
-    chip: "bg-emerald-500/15 text-emerald-700",
-    ring: "ring-1 ring-slate-200/70",
-    shadow: "shadow-[0_18px_34px_-26px_rgba(15,23,42,0.35)]",
-  },
-  slate: {
-    card: "bg-white text-slate-900",
-    bar: "bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900",
-    chip: "bg-slate-500/15 text-slate-700",
-    ring: "ring-1 ring-slate-200/70",
-    shadow: "shadow-[0_18px_34px_-26px_rgba(15,23,42,0.35)]",
-  },
-};
-
-const blockSizes = [
-  "sm:col-span-2 sm:row-span-2",
-  "sm:col-span-1 sm:row-span-1",
-  "sm:col-span-1 sm:row-span-2",
-  "sm:col-span-2 sm:row-span-1",
-  "sm:col-span-2 sm:row-span-1",
-  "sm:col-span-1 sm:row-span-1",
-  "sm:col-span-1 sm:row-span-2",
-  "sm:col-span-2 sm:row-span-1",
-  "sm:col-span-1 sm:row-span-1",
-  "sm:col-span-2 sm:row-span-2",
-  "sm:col-span-1 sm:row-span-1",
-  "sm:col-span-2 sm:row-span-1",
-  "sm:col-span-1 sm:row-span-2",
-  "sm:col-span-1 sm:row-span-1",
-  "sm:col-span-2 sm:row-span-1",
+  "Search Engine Optimization",
+  "Social Media Marketing",
+  "Facebook & Instagram Ads",
+  "Google Ads",
+  "Website Designing",
+  "Website Development",
+  "Graphic Designing",
+  "Video Editing",
+  "Influencer Marketing",
+  "E-Commerce Marketing",
+  "Online Reputation Management",
+  "Blogging & Bloggers",
+  "Full Stack Development",
+  "Ads Psychology",
+  "Mock Interviews",
 ];
 
 export function LearningSection() {
   return (
-    <section className="relative overflow-hidden py-12 md:py-10 lg:py-12 bg-slate-50">
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Section Title */}
-        <h2 className="text-3xl md:text-4xl font-black text-center text-slate-900 mb-3 tracking-tight flow-underline">
-          What will you learn?
-        </h2>
-        {/* Section Subtitle */}
-        <p className="text-lg text-center text-slate-600 mb-8 md:mb-12">
-          Learn to Become a Professional.
-        </p>
+    <section className="relative overflow-hidden bg-[linear-gradient(180deg,#f8fafc_0%,#eef6ff_100%)] py-14 md:py-16">
+      <div className="pointer-events-none absolute -left-10 top-10 h-56 w-56 rounded-full bg-cyan-200/40 blur-3xl" />
+      <div className="pointer-events-none absolute right-0 top-0 h-64 w-64 rounded-full bg-indigo-200/30 blur-3xl" />
 
-        {/* Text-based Learning Topics */}
-        <div className="max-w-4xl mx-auto bg-white/90 border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            <span className="font-semibold text-slate-900">You will cover:</span>{" "}
+      <div className="container relative z-10 mx-auto px-4">
+        <div className="mx-auto max-w-5xl text-center">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-white/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-700 shadow-sm backdrop-blur">
+            <Sparkles className="h-3.5 w-3.5" />
+            Learning outcomes
+          </div>
+          <h2 className="text-3xl font-black tracking-tight text-slate-950 md:text-5xl">
+            What will you learn?
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
+            Explore a broad set of practical skills designed to make you employable and confident.
+          </p>
+        </div>
+
+        <div className="mx-auto mt-10 max-w-5xl rounded-[32px] border border-slate-200 bg-white/90 p-6 shadow-[0_24px_60px_-42px_rgba(15,23,42,0.45)] backdrop-blur sm:p-8">
+          <p className="text-sm leading-relaxed text-slate-600 sm:text-base">
+            <span className="font-semibold text-slate-950">You will cover:</span>{" "}
             {learningTopics.map((topic, index) => (
-              <span key={topic.text} className="inline">
-                <span className="text-slate-900 font-medium">{topic.text}</span>
+              <span key={topic} className="inline">
+                <span className="font-medium text-slate-900">{topic}</span>
                 {index < learningTopics.length - 1 ? ", " : "."}
               </span>
             ))}
           </p>
-          <div className="mt-5 flex flex-wrap gap-2">
-            {learningTopics.slice(0, 8).map((topic) => (
-              <span
-                key={`${topic.text}-pill`}
-                className="inline-flex items-center gap-1 rounded-full bg-slate-100 text-slate-700 px-3 py-1 text-xs font-semibold"
-              >
+
+          <div className="mt-6 flex flex-wrap gap-2.5">
+            {learningTopics.map((topic) => (
+              <span key={topic} className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-700">
                 <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
-                {topic.text}
+                {topic}
               </span>
             ))}
           </div>
