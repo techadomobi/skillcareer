@@ -59,43 +59,43 @@ export default function EnrollCourseInfo({ course }) {
         </div>
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
-        <div className="overflow-hidden rounded-[30px] border border-slate-200 bg-white shadow-sm">
-          <div className="relative aspect-[16/10] w-full">
-            <Image src={course?.image || DEFAULT_IMAGE} alt={title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" priority />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/10 to-transparent" />
-            {discountedPrice ? (
-              <div className="absolute bottom-4 left-4 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-white backdrop-blur">
-                <span className="inline-flex items-center text-lg font-bold">
-                  <IndianRupee className="mr-1 h-4 w-4" />
-                  {Number(discountedPrice).toLocaleString("en-IN")}
-                </span>
-                {price && price !== discountedPrice ? (
-                  <span className="ml-2 text-xs text-slate-200 line-through">INR {Number(price).toLocaleString("en-IN")}</span>
-                ) : null}
-              </div>
-            ) : null}
-          </div>
+      {/* Course Image at Top with Gradient Overlay and Pricing */}
+      <div className="overflow-hidden rounded-[30px] border border-slate-200 bg-white shadow-sm">
+        <div className="relative aspect-[16/10] w-full">
+          <Image src={course?.image || DEFAULT_IMAGE} alt={title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" priority />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/10 to-transparent" />
+          {discountedPrice ? (
+            <div className="absolute bottom-4 left-4 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-white backdrop-blur">
+              <span className="inline-flex items-center text-lg font-bold">
+                <IndianRupee className="mr-1 h-4 w-4" />
+                {Number(discountedPrice).toLocaleString("en-IN")}
+              </span>
+              {price && price !== discountedPrice ? (
+                <span className="ml-2 text-xs text-slate-200 line-through">INR {Number(price).toLocaleString("en-IN")}</span>
+              ) : null}
+            </div>
+          ) : null}
         </div>
+      </div>
 
-        <div className="rounded-[30px] border border-slate-200 bg-white p-5 shadow-sm">
-          <div className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-700">What happens next</div>
-          <ul className="mt-4 space-y-3 text-sm text-slate-700">
-            {benefits.map((benefit) => (
-              <li key={benefit} className="flex items-start gap-3 rounded-2xl bg-slate-50 px-4 py-3">
-                <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-                <span>{benefit}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-5 flex flex-col gap-3">
-            <Button asChild className="h-11 rounded-full bg-slate-950 text-white hover:bg-cyan-700">
-              <Link href="/courses">Browse all courses</Link>
-            </Button>
-            <Button variant="outline" asChild className="h-11 rounded-full">
-              <Link href="/contact">Talk to admissions</Link>
-            </Button>
-          </div>
+      {/* ContactForm Content Area - What happens next */}
+      <div className="rounded-[30px] border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-700">What happens next</div>
+        <ul className="mt-4 space-y-3 text-sm text-slate-700">
+          {benefits.map((benefit) => (
+            <li key={benefit} className="flex items-start gap-3 rounded-2xl bg-slate-50 px-4 py-3">
+              <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
+              <span>{benefit}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-5 flex flex-col gap-3">
+          <Button asChild className="h-11 rounded-full bg-slate-950 text-white hover:bg-cyan-700">
+            <Link href="/courses">Browse all courses</Link>
+          </Button>
+          <Button variant="outline" asChild className="h-11 rounded-full">
+            <Link href="/contact">Talk to admissions</Link>
+          </Button>
         </div>
       </div>
     </div>
